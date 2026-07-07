@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Hero from './components/Hero.jsx'
 import ProgressCard from './components/ProgressCard.jsx'
 import Story from './components/Story.jsx'
@@ -8,68 +8,24 @@ import Updates from './components/Updates.jsx'
 import DonationWall from './components/DonationWall.jsx'
 import DonateSection from './components/DonateSection.jsx'
 import StickyDonate from './components/StickyDonate.jsx'
-import ThankYou from './components/ThankYou.jsx'
 import Footer from './components/Footer.jsx'
 import ShareButtons from './components/ShareButtons.jsx'
 import HeartLine from './components/HeartLine.jsx'
-import { startMolliePayment, DEMO_MODE } from './lib/mollie.js'
+import { TIKKIE_URL, ING_URL } from './lib/config.js'
+import { DONATIONS } from './data/donations.js'
 
 const GOAL = 150000
 
-// Donaties worden lokaal bewaard zodat de demo-flow werkt.
-// LET OP: zodra Mollie live staat, hoort de echte stand uit je
-// backend te komen (zie uitleg in src/lib/mollie.js, stap 3).
-const STORAGE_KEY = 'help-tom-donaties'
-
-function loadDonations() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      const parsed = JSON.parse(raw)
-      // Oud formaat ({raised, donors}) of nieuw formaat (array)
-      if (Array.isArray(parsed)) return parsed
-    }
-  } catch {
-    /* opnieuw beginnen bij corrupte data */
-  }
-  return []
-}
-
 export default function App() {
-  const [donations, setDonations] = useState(loadDonations)
-  const [view, setView] = useState('home')
-  const [lastAmount, setLastAmount] = useState(null)
-  const [processing, setProcessing] = useState(false)
   const [donateVisible, setDonateVisible] = useState(false)
 
-  const raised = donations.reduce((sum, d) => sum + d.amount, 0)
-  const donors = donations.length
-
-  // Als Mollie na een echte betaling terugstuurt naar /?bedankt=1
-  // tonen we meteen de bedankpagina.
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('bedankt') === '1') {
-      setView('thanks')
-      window.history.replaceState({}, '', window.location.pathname)
-    }
-  }, [])
-
-  // Buiten demo-modus komt de echte lijst donaties van je backend
-  // (gevuld door de Mollie-webhook, zie src/lib/mollie.js stap 3).
-  useEffect(() => {
-    if (DEMO_MODE) return
-    fetch('/api/donations')
-      .then((res) => (res.ok ? res.json() : []))
-      .then((list) => Array.isArray(list) && setDonations(list))
-      .catch(() => {
-        /* backend nog niet beschikbaar; teller blijft op 0 */
-      })
-  }, [])
+  // Teller en muur komen uit de handmatig bijgehouden lijst
+  // in src/data/donations.js (zie de uitleg in dat bestand).
+  const raised = DONATIONS.reduce((sum, d) => sum + d.amount, 0)
+  const donors = DONATIONS.length
 
   // Verberg de sticky doneerbalk zodra de doneersectie in beeld is.
   useEffect(() => {
-    if (view !== 'home') return
     const el = document.getElementById('doneer')
     if (!el) return
     const observer = new IntersectionObserver(
@@ -78,51 +34,11 @@ export default function App() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [view])
-
-  const addDonation = (donation) => {
-    setDonations((prev) => {
-      const next = [...prev, donation]
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-      return next
-    })
-  }
-
-  const handleDonate = async (amount, { name = '', message = '' } = {}) => {
-    setProcessing(true)
-    try {
-      const result = await startMolliePayment(amount, { name, message })
-      if (result.demo) {
-        // Demo-modus: betaling gesimuleerd, donatie direct toevoegen.
-        addDonation({ amount, name, message, timestamp: Date.now() })
-        setLastAmount(amount)
-        setView('thanks')
-        window.scrollTo(0, 0)
-      }
-      // Bij een echte betaling stuurt startMolliePayment de bezoeker
-      // door naar Mollie; de bedankpagina volgt via /?bedankt=1.
-    } catch {
-      alert('Er ging iets mis bij het starten van de betaling. Probeer het opnieuw.')
-    } finally {
-      setProcessing(false)
-    }
-  }
-
-  if (view === 'thanks') {
-    return (
-      <ThankYou
-        amount={lastAmount}
-        onBack={() => {
-          setView('home')
-          window.scrollTo(0, 0)
-        }}
-      />
-    )
-  }
+  }, [])
 
   return (
     <>
-      {DEMO_MODE && (
+      {!TIKKIE_URL && !ING_URL && (
         <div className="demo-note">
           Voorbeeldversie: de doneerknop staat nog niet aan. Er kan nog geen
           geld worden overgemaakt.
@@ -137,8 +53,8 @@ export default function App() {
       <WhyDonate />
       <HeartLine className="heartline-divider" color="#1B3A6B" />
       <Updates />
-      <DonationWall donations={donations} />
-      <DonateSection onDonate={handleDonate} processing={processing} />
+      <DonationWall donations={DONATIONS} />
+      <DonateSection />
 
       <div className="share-section">
         <div className="container narrow">

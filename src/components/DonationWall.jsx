@@ -22,7 +22,8 @@ function timeAgo(timestamp) {
 export default function DonationWall({ donations }) {
   const [showAll, setShowAll] = useState(false)
 
-  // Nieuwste bovenaan
+  // Nieuwste bovenaan: handmatige lijst staat al op volgorde,
+  // entries met timestamp worden daarbinnen gesorteerd.
   const sorted = [...donations].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
   const visible = showAll ? sorted : sorted.slice(0, SHOW_FIRST)
 
@@ -53,7 +54,7 @@ export default function DonationWall({ donations }) {
                       <div className="wall-head">
                         <strong>{name}</strong>
                         <span className="wall-amount">{formatEuro(d.amount)}</span>
-                        <span className="wall-time">{timeAgo(d.timestamp)}</span>
+                        <span className="wall-time">{d.date || timeAgo(d.timestamp)}</span>
                       </div>
                       {d.message?.trim() && <p className="wall-message">{d.message}</p>}
                     </div>

@@ -4,6 +4,8 @@ Crowdfundingpagina voor Tom Wals (59, Geldermalsen) om zijn CAR-T
 celtherapie bij het Sheba Medical Center in Israël mogelijk te maken.
 Doelbedrag: €150.000.
 
+**Live:** https://arnowals-art.github.io/help-tom/
+
 ## Starten
 
 ```bash
@@ -12,41 +14,63 @@ npm run dev        # lokaal bekijken op http://localhost:5173
 npm run build      # productie-build in /dist
 ```
 
-## Voordat je live gaat — checklist
+## Wijzigingen online zetten
 
-1. **Familiefoto's toevoegen**
+```bash
+npm run build && npx gh-pages -d dist
+```
+
+Na een minuut of twee staat de nieuwe versie op de live-link.
+(Commit en push daarnaast je wijzigingen naar GitHub: `git add -A &&
+git commit -m "..." && git push`.)
+
+## Voordat je de link breed deelt — checklist
+
+1. **Doneerlink instellen (Tikkie en/of ING betaalverzoek)**
+   - Maak in de Tikkie-app en/of de ING-app een betaalverzoek en
+     plak de link(s) in `src/lib/config.js` (daar staat de uitleg)
+   - De site toont automatisch een knop voor elke ingevulde link
+   - LET OP: een Tikkie is 14 dagen geldig en ook een ING
+     betaalverzoek verloopt — zet een herinnering om ze op tijd te
+     vervangen
+   - Zolang beide links leeg zijn, toont de site "doneerknop staat
+     nog niet aan"
+
+2. **Familiefoto's toevoegen**
    - Zet de foto's in de map `public/` (bijv. `familiefoto.jpg` en `tom.jpg`)
    - Vervang de placeholders in `src/components/Hero.jsx` en
      `src/components/Story.jsx` (de comments in die bestanden leggen uit hoe)
    - Zet ook een foto van 1200×630 px als `public/og-familiefoto.jpg` —
      die verschijnt als voorbeeld bij het delen op WhatsApp/Facebook
 
-2. **Mollie aansluiten (iDEAL, creditcard, PayPal)**
-   - Volg het stappenplan in `src/lib/mollie.js` — daar staat precies
-     hoe je je Mollie API key gebruikt en welk backend-endpoint je nodig hebt
-   - Zet daarna `DEMO_MODE` in dat bestand op `false`
-   - Zolang `DEMO_MODE` op `true` staat worden betalingen gesimuleerd
-     (handig om de site alvast te laten zien)
+3. **Teller en steunbetuigingen bijhouden**
+   - Tikkie en ING geven niet automatisch aan de site door wie er
+     betaald heeft
+   - Voeg donaties zelf toe in `src/data/donations.js` (uitleg staat
+     in dat bestand) en zet de site opnieuw online
+   - De voortgangsbalk en het aantal donateurs rekenen zichzelf uit
+   - Wie geen naam wil: laat het naamveld leeg, dan staat er "Anoniem"
 
-3. **Domein invullen**
-   - Vervang `https://helptom.nl` in `src/components/ShareButtons.jsx`
-     door het echte domein
-   - Vul hetzelfde domein in bij `redirectUrl` en `webhookUrl`
-     in de Mollie-backend (zie `src/lib/mollie.js`)
+4. **Domein (optioneel)**
+   - Wil je een eigen domein zoals helptom.nl? Koppel het in de
+     GitHub-repo onder Settings → Pages → Custom domain
+   - Vervang daarna ook `https://helptom.nl` in
+     `src/components/ShareButtons.jsx`
 
-4. **Teller en donatiemuur**
-   - In demo-modus worden donaties (bedrag, naam, bericht) lokaal in de
-     browser bijgehouden
-   - Voor de echte stand: laat de Mollie-webhook de donaties opslaan en
-     bied ze aan via `/api/donations` (uitleg in `src/lib/mollie.js`,
-     stap 3) — de site vult daarmee de voortgangsbalk én de donatiemuur
-   - Een donateur die geen naam invult staat op de muur als "Anoniem"
+## Later upgraden naar Mollie (automatische teller)
+
+In `src/lib/mollie.js` staat een compleet stappenplan voor echte
+iDEAL/creditcard/PayPal-betalingen via Mollie, inclusief webhook
+waarmee de teller en de muur automatisch bijgewerkt worden. Dat
+vraagt een klein backend-endpoint; de frontend-code is er al op
+voorbereid.
 
 ## Structuur
 
-- `src/App.jsx` — hoofdcomponent, teller en betaalflow
+- `src/App.jsx` — hoofdcomponent, teller
+- `src/lib/config.js` — de doneerlinks (Tikkie / ING betaalverzoek)
+- `src/data/donations.js` — handmatig bijgehouden donatielijst
 - `src/components/` — alle secties (hero, verhaal, behandeling, doneer, …)
-- `src/lib/mollie.js` — betaallogica + Mollie-instructies
 - `src/index.css` — alle styling (kleuren bovenin als CSS-variabelen)
 
-Deze pagina is opgezet door Arno Wals, zoon van Tom. ♥
+Deze pagina is opgezet door Arno Wals, zoon van Tom.
