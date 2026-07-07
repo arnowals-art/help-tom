@@ -16,10 +16,9 @@ export default function Story() {
                 In januari 2026 kregen we de diagnose: diffuse cutane
                 systemische sclerose, oftewel sclerodermie. Een zeldzame
                 auto-immuunziekte waarbij zijn afweersysteem zijn eigen
-                lichaam aanvalt. Zijn huid wordt langzaam hard. Op zijn
-                vingers zitten wondjes die niet genezen. Zijn gewrichten zijn
-                stijf en doen pijn. Inmiddels zijn ook zijn longen en hart
-                aangetast.
+                lichaam aanvalt. Zijn huid wordt langzaam hard. Zijn
+                gewrichten zijn stijf en doen pijn. Inmiddels zijn ook zijn
+                longen en hart aangetast.
               </p>
               <p>
                 Hij heeft vier maanden chemotherapie gehad. Dat heeft de
