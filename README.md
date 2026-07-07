@@ -4,7 +4,8 @@ Crowdfundingpagina voor Tom Wals (59, Geldermalsen) om zijn CAR-T
 celtherapie bij het Sheba Medical Center in Israël mogelijk te maken.
 Doelbedrag: €100.000 (totale kosten incl. reis ca. €150.000).
 
-**Live:** https://arnowals-art.github.io/help-tom/
+**Live:** https://helptom.nl (via GitHub Pages; oude adres
+https://arnowals-art.github.io/help-tom/ verwijst automatisch door)
 
 ## Starten
 
