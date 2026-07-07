@@ -42,13 +42,17 @@ git commit -m "..." && git push`.)
    - Zet ook een foto van 1200×630 px als `public/og-familiefoto.jpg` —
      die verschijnt als voorbeeld bij het delen op WhatsApp/Facebook
 
-3. **Teller en steunbetuigingen bijhouden**
-   - ING geeft niet automatisch aan de site door wie er betaald
-     heeft
-   - Voeg donaties zelf toe in `src/data/donations.js` (uitleg staat
-     in dat bestand) en zet de site opnieuw online
-   - De voortgangsbalk en het aantal donateurs rekenen zichzelf uit
-   - Wie geen naam wil: laat het naamveld leeg, dan staat er "Anoniem"
+3. **Automatische teller aanzetten (Google Formulier + Spreadsheet)**
+   - Bezoekers kiezen eerst hun bedrag op de site en gaan daarna pas
+     naar het ING-betaalscherm; die toezegging komt automatisch in
+     een Google Spreadsheet en de site leest die weer uit
+   - Eenmalig instellen (±10 minuten): volg het stappenplan in
+     `src/lib/config.js`
+   - Beheer: klopt een toezegging niet met wat er echt binnenkomt in
+     de ING-app? Verwijder of corrigeer die rij in de spreadsheet —
+     de site past zich vanzelf aan (geen her-deploy nodig)
+   - Donaties buiten de site om (overschrijving, contant) voeg je toe
+     in `src/data/donations.js`
 
 4. **Domein (optioneel)**
    - Wil je een eigen domein zoals helptom.nl? Koppel het in de

@@ -1,25 +1,99 @@
+import { useState } from 'react'
 import { ING_URL } from '../lib/config.js'
+import { submitPledge } from '../lib/pledges.js'
+import { formatEuro } from '../lib/format.js'
 
-export default function DonateSection() {
+const PRESETS = [10, 25, 50, 100]
+
+export default function DonateSection({ onPledged }) {
+  const [selected, setSelected] = useState(25)
+  const [custom, setCustom] = useState('')
+  const [name, setName] = useState('')
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+
+  const amount = custom !== '' ? Number(custom) : selected
+
+  const handleDonate = () => {
+    setError('')
+    if (!amount || amount < 1 || Number.isNaN(amount)) {
+      setError('Vul een geldig bedrag in (minimaal €1).')
+      return
+    }
+
+    // Toezegging vastleggen voor de teller en de steunbetuigingen…
+    submitPledge({ amount, name, message })
+
+    // …en dan door naar het ING-betaalscherm (nieuw tabblad).
+    const opened = window.open(ING_URL, '_blank', 'noopener')
+
+    onPledged({
+      amount,
+      name,
+      message,
+      timestamp: Date.now(),
+      ingOpened: Boolean(opened),
+    })
+  }
+
   return (
     <section className="donate" id="doneer">
       <div className="container narrow">
         <span className="section-label">Doneren</span>
         <h2 className="section-title">Help mee met de behandeling</h2>
         <p className="donate-sub">
-          Alles wat je kunt missen helpt ons om het bedrag bij elkaar te
-          krijgen. Dank je wel.
+          Kies je bedrag, daarna opent het betaalscherm van ING. Alles wat
+          je kunt missen helpt ons. Dank je wel.
         </p>
 
+        <div className="amounts">
+          {PRESETS.map((v) => (
+            <button
+              key={v}
+              className={`amount-btn ${custom === '' && selected === v ? 'active' : ''}`}
+              onClick={() => {
+                setSelected(v)
+                setCustom('')
+              }}
+            >
+              €{v}
+            </button>
+          ))}
+          <label className="custom-amount">
+            <span>€</span>
+            <input
+              type="number"
+              min="1"
+              placeholder="Eigen bedrag"
+              value={custom}
+              onChange={(e) => setCustom(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="donate-fields">
+          <input
+            type="text"
+            maxLength={60}
+            placeholder="Je naam (mag leeg — dan sta je er als Anoniem)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <textarea
+            rows={2}
+            maxLength={280}
+            placeholder="Bericht voor Tom en de familie (niet verplicht)"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+
         {ING_URL ? (
-          <a
-            className="btn btn-gold btn-big"
-            href={ING_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Doneer via ING betaalverzoek
-          </a>
+          <button className="btn btn-gold btn-big" onClick={handleDonate}>
+            {amount && !Number.isNaN(amount) && amount >= 1
+              ? `Doneer ${formatEuro(amount)} via ING`
+              : 'Doneer via ING'}
+          </button>
         ) : (
           /* De ING-link is nog niet ingesteld — zie src/lib/config.js */
           <button className="btn btn-gold btn-big" disabled>
@@ -27,14 +101,11 @@ export default function DonateSection() {
           </button>
         )}
 
+        {error && <p className="pay-error">{error}</p>}
+
         <p className="pay-note">
-          Je betaalt veilig via iDEAL en kiest zelf je bedrag. Werkt met
-          elke Nederlandse bank, niet alleen ING.
-        </p>
-        <p className="pay-fineprint">
-          Wil je met een berichtje bij de steunbetuigingen staan? Mail naar{' '}
-          <a href="mailto:arnowals@icloud.com">arnowals@icloud.com</a>, dan
-          zetten we het erbij.
+          Je betaalt veilig via iDEAL en vult daar hetzelfde bedrag in.
+          Werkt met elke Nederlandse bank, niet alleen ING.
         </p>
         <p className="pay-fineprint">Donaties zijn helaas niet fiscaal aftrekbaar</p>
       </div>
