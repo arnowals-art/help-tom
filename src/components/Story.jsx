@@ -37,7 +37,7 @@ export default function Story() {
               alt="Tom en Reinet met hun kinderen en de hond op de heide"
             />
             <p className="photo-caption">
-              Tom en Reinet met de familie, op de heide bij Geldermalsen.
+              Tom en Reinet met de familie, op de heide.
             </p>
           </div>
         </div>
