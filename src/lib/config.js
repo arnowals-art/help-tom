@@ -29,7 +29,6 @@
 export const ING_URLS = {
   open: 'https://www.ing.nl/payreq/m/?trxid=l6GQjj4uKhRZt5CSnGjse5lp88rFWisn',
   10: 'https://www.ing.nl/payreq/m/?trxid=l7xPbtJEfjxHE4G0xx0X7XxbajS5xdsn',
-  25: '',
   50: 'https://www.ing.nl/payreq/m/?trxid=AKrYTNWmoxZE8BKVLHK2cCLDh64afxIG',
   100: 'https://www.ing.nl/payreq/m/?trxid=lAS1TBWzl9JDnWPeZ5ZGOfjWY3imClZs',
 }
