@@ -22,4 +22,4 @@
    doneerknop nog niet actief is.
    ================================================================ */
 
-export const ING_URL = ''
+export const ING_URL = 'https://www.ing.nl/payreq/m/?trxid=xZlbYma2K3nAoJUOaRRGQtZPNP1Z2Z3L'
