@@ -1,7 +1,16 @@
 import { formatEuro } from '../lib/format.js'
 
-export default function ProgressCard({ raised, goal, donors }) {
+export default function ProgressCard({ raised, goal, donors, bankUpdatedAt }) {
   const pct = Math.min(100, (raised / goal) * 100)
+
+  const updatedLabel = bankUpdatedAt
+    ? new Date(bankUpdatedAt).toLocaleString('nl-NL', {
+        day: 'numeric',
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : null
 
   return (
     <div className="container">
@@ -22,6 +31,11 @@ export default function ProgressCard({ raised, goal, donors }) {
           </span>
           <span className="urgency">De ziekte gaat door, dus elke dag telt</span>
         </div>
+        {updatedLabel && (
+          <p className="bank-note">
+            Stand van de rekening, automatisch bijgewerkt ({updatedLabel})
+          </p>
+        )}
       </div>
     </div>
   )

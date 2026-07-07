@@ -14,6 +14,7 @@ import ShareButtons from './components/ShareButtons.jsx'
 import HeartLine from './components/HeartLine.jsx'
 import { ING_URL } from './lib/config.js'
 import { fetchPledges } from './lib/pledges.js'
+import { fetchBankStats } from './lib/bank.js'
 import { DONATIONS } from './data/donations.js'
 
 const GOAL = 100000
@@ -23,17 +24,28 @@ export default function App() {
   const [pledges, setPledges] = useState([])
   // Toezeggingen die deze bezoeker zojuist zelf deed
   const [ownPledges, setOwnPledges] = useState([])
+  // Echte bankstand via de bankkoppeling (zie src/lib/bank.js)
+  const [bank, setBank] = useState(null)
   const [view, setView] = useState('home')
   const [lastPledge, setLastPledge] = useState(null)
   const [donateVisible, setDonateVisible] = useState(false)
 
-  // Handmatige correcties/aanvullingen + spreadsheet + eigen toezeggingen
+  // De muur toont steunbetuigingen (spreadsheet + eigen toezegging);
+  // handmatige aanvullingen uit donations.js tellen overal mee.
   const donations = [...DONATIONS, ...pledges, ...ownPledges]
-  const raised = donations.reduce((sum, d) => sum + d.amount, 0)
-  const donors = donations.length
+
+  // Teller: zodra de bankkoppeling actief is telt de échte bankstand
+  // (plus handmatige aanvullingen zoals contant geld); anders de
+  // toezeggingen van de site.
+  const manualRaised = DONATIONS.reduce((sum, d) => sum + d.amount, 0)
+  const raised = bank
+    ? bank.raised + manualRaised
+    : donations.reduce((sum, d) => sum + d.amount, 0)
+  const donors = bank ? bank.donors + DONATIONS.length : donations.length
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))
+    fetchBankStats().then(setBank)
   }, [])
 
   // Verberg de sticky doneerbalk zodra de doneersectie in beeld is.
@@ -79,7 +91,12 @@ export default function App() {
       )}
 
       <Hero />
-      <ProgressCard raised={raised} goal={GOAL} donors={donors} />
+      <ProgressCard
+        raised={raised}
+        goal={GOAL}
+        donors={donors}
+        bankUpdatedAt={bank?.updatedAt}
+      />
       <Story />
       <HeartLine className="heartline-divider" color="#1B3A6B" />
       <Treatment />
