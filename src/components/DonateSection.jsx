@@ -104,8 +104,9 @@ export default function DonateSection({ onPledged }) {
         {error && <p className="pay-error">{error}</p>}
 
         <p className="pay-note">
-          Je betaalt veilig via iDEAL en vult daar hetzelfde bedrag in.
-          Werkt met elke Nederlandse bank, niet alleen ING.
+          Je betaalt veilig via een betaalverzoek, rechtstreeks naar Tom.
+          Vul daar hetzelfde bedrag in. Werkt met elke Nederlandse bank,
+          niet alleen ING.
         </p>
         <p className="pay-fineprint">Donaties zijn helaas niet fiscaal aftrekbaar</p>
       </div>

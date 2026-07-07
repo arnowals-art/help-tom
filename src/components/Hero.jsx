@@ -14,7 +14,10 @@ export default function Hero() {
           <a href="#doneer" className="btn btn-gold btn-big">
             Doneer voor Toms behandeling
           </a>
-          <p className="hero-cta-note">Veilig betalen via iDEAL. Elk bedrag helpt.</p>
+          <p className="hero-cta-note">
+            Veilig betalen via betaalverzoek, rechtstreeks naar Tom. Elk
+            bedrag helpt.
+          </p>
         </div>
 
         <div className="hero-photo">
