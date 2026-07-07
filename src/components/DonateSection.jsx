@@ -1,8 +1,6 @@
-import { TIKKIE_URL, ING_URL } from '../lib/config.js'
+import { ING_URL } from '../lib/config.js'
 
 export default function DonateSection() {
-  const hasLink = Boolean(TIKKIE_URL || ING_URL)
-
   return (
     <section className="donate" id="doneer">
       <div className="container narrow">
@@ -13,38 +11,25 @@ export default function DonateSection() {
           krijgen. Dank je wel.
         </p>
 
-        {hasLink ? (
-          <div className="donate-buttons">
-            {TIKKIE_URL && (
-              <a
-                className="btn btn-gold btn-big"
-                href={TIKKIE_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Doneer via Tikkie
-              </a>
-            )}
-            {ING_URL && (
-              <a
-                className={`btn btn-big ${TIKKIE_URL ? 'btn-light' : 'btn-gold'}`}
-                href={ING_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Doneer via ING betaalverzoek
-              </a>
-            )}
-          </div>
+        {ING_URL ? (
+          <a
+            className="btn btn-gold btn-big"
+            href={ING_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Doneer via ING betaalverzoek
+          </a>
         ) : (
-          /* Nog geen doneerlink ingesteld — zie src/lib/config.js */
+          /* De ING-link is nog niet ingesteld — zie src/lib/config.js */
           <button className="btn btn-gold btn-big" disabled>
             Doneerknop binnenkort actief
           </button>
         )}
 
         <p className="pay-note">
-          Je betaalt veilig via iDEAL en kiest zelf je bedrag.
+          Je betaalt veilig via iDEAL en kiest zelf je bedrag. Werkt met
+          elke Nederlandse bank, niet alleen ING.
         </p>
         <p className="pay-fineprint">
           Wil je met een berichtje bij de steunbetuigingen staan? Mail naar{' '}

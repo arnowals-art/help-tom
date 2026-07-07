@@ -11,7 +11,7 @@ import StickyDonate from './components/StickyDonate.jsx'
 import Footer from './components/Footer.jsx'
 import ShareButtons from './components/ShareButtons.jsx'
 import HeartLine from './components/HeartLine.jsx'
-import { TIKKIE_URL, ING_URL } from './lib/config.js'
+import { ING_URL } from './lib/config.js'
 import { DONATIONS } from './data/donations.js'
 
 const GOAL = 150000
@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <>
-      {!TIKKIE_URL && !ING_URL && (
+      {!ING_URL && (
         <div className="demo-note">
           Voorbeeldversie: de doneerknop staat nog niet aan. Er kan nog geen
           geld worden overgemaakt.

@@ -26,15 +26,14 @@ git commit -m "..." && git push`.)
 
 ## Voordat je de link breed deelt — checklist
 
-1. **Doneerlink instellen (Tikkie en/of ING betaalverzoek)**
-   - Maak in de Tikkie-app en/of de ING-app een betaalverzoek en
-     plak de link(s) in `src/lib/config.js` (daar staat de uitleg)
-   - De site toont automatisch een knop voor elke ingevulde link
-   - LET OP: een Tikkie is 14 dagen geldig en ook een ING
-     betaalverzoek verloopt — zet een herinnering om ze op tijd te
-     vervangen
-   - Zolang beide links leeg zijn, toont de site "doneerknop staat
-     nog niet aan"
+1. **ING betaalverzoek instellen**
+   - Maak in de ING-app een betaalverzoek (bedrag open laten,
+     geldigheid op maximum) en plak de link in `src/lib/config.js`
+     (daar staat de uitleg)
+   - LET OP: een ING betaalverzoek verloopt — zet een herinnering
+     om hem op tijd te vervangen
+   - Zolang de link leeg is, toont de site "doneerknop staat nog
+     niet aan"
 
 2. **Familiefoto's toevoegen**
    - Zet de foto's in de map `public/` (bijv. `familiefoto.jpg` en `tom.jpg`)
@@ -44,8 +43,8 @@ git commit -m "..." && git push`.)
      die verschijnt als voorbeeld bij het delen op WhatsApp/Facebook
 
 3. **Teller en steunbetuigingen bijhouden**
-   - Tikkie en ING geven niet automatisch aan de site door wie er
-     betaald heeft
+   - ING geeft niet automatisch aan de site door wie er betaald
+     heeft
    - Voeg donaties zelf toe in `src/data/donations.js` (uitleg staat
      in dat bestand) en zet de site opnieuw online
    - De voortgangsbalk en het aantal donateurs rekenen zichzelf uit
@@ -68,7 +67,7 @@ voorbereid.
 ## Structuur
 
 - `src/App.jsx` — hoofdcomponent, teller
-- `src/lib/config.js` — de doneerlinks (Tikkie / ING betaalverzoek)
+- `src/lib/config.js` — de doneerlink (ING betaalverzoek)
 - `src/data/donations.js` — handmatig bijgehouden donatielijst
 - `src/components/` — alle secties (hero, verhaal, behandeling, doneer, …)
 - `src/index.css` — alle styling (kleuren bovenin als CSS-variabelen)

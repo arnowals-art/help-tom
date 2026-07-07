@@ -187,24 +187,6 @@ section {
   border-color: var(--gold);
 }
 
-.donate-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-}
-
-.btn-light {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  color: var(--white);
-}
-
-.btn-light:hover {
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-
 .btn:disabled {
   opacity: 0.55;
   cursor: default;
