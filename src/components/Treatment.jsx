@@ -27,9 +27,11 @@ export default function Treatment() {
           </p>
           <p>
             Er is één probleem: de Nederlandse zorgverzekering vergoedt deze
-            behandeling niet. De kosten zijn <strong>€150.000</strong>. Dat
-            bedrag kunnen we als familie niet alleen opbrengen. Daarom deze
-            pagina.
+            behandeling niet. De totale behandeling kost inclusief reiskosten
+            ongeveer <strong>€150.000</strong>. Dat bedrag kunnen we als
+            familie opbrengen, maar het is veel geld. Daarom vragen we hulp:
+            elke donatie verlicht die last. Ons doelbedrag is{' '}
+            <strong>€100.000</strong>.
           </p>
         </div>
 

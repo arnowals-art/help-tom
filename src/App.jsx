@@ -16,7 +16,7 @@ import { ING_URL } from './lib/config.js'
 import { fetchPledges } from './lib/pledges.js'
 import { DONATIONS } from './data/donations.js'
 
-const GOAL = 150000
+const GOAL = 100000
 
 export default function App() {
   // Toezeggingen uit de Google Spreadsheet (zie src/lib/config.js)
