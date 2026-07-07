@@ -29,8 +29,8 @@
 export const ING_URLS = {
   open: 'https://www.ing.nl/payreq/m/?trxid=l6GQjj4uKhRZt5CSnGjse5lp88rFWisn',
   10: 'https://www.ing.nl/payreq/m/?trxid=5PN0OXkCFj1Sf7SuHkgyqbwjAGLPo16X',
-  50: 'https://www.ing.nl/payreq/m/?trxid=AKrYTNWmoxZE8BKVLHK2cCLDh64afxIG',
-  100: 'https://www.ing.nl/payreq/m/?trxid=lAS1TBWzl9JDnWPeZ5ZGOfjWY3imClZs',
+  50: 'https://www.ing.nl/payreq/m/?trxid=oiWk69MK3ffBd1YAwuz7dc52QmvTfxLx',
+  100: 'https://www.ing.nl/payreq/m/?trxid=d8L3AS89H3sABOSArpiaJjgTqtqiCf2g',
 }
 
 // De link voor een gekozen bedrag: het vaste verzoek als dat er
