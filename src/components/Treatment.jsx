@@ -26,10 +26,10 @@ export default function Treatment() {
             meer nodig.
           </p>
           <p>
-            Er is één probleem: omdat de behandeling in het buitenland
-            plaatsvindt, vergoedt de Nederlandse zorgverzekering niets. De
-            kosten zijn <strong>€150.000</strong>. Dat bedrag kunnen we als
-            familie niet alleen opbrengen. Daarom deze pagina.
+            Er is één probleem: de Nederlandse zorgverzekering vergoedt deze
+            behandeling niet. De kosten zijn <strong>€150.000</strong>. Dat
+            bedrag kunnen we als familie niet alleen opbrengen. Daarom deze
+            pagina.
           </p>
         </div>
 

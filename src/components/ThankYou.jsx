@@ -12,7 +12,7 @@ export default function ThankYou({ amount, ingOpened, onBack }) {
             ? 'Het betaalscherm van ING is in een nieuw tabblad geopend.'
             : 'Het betaalscherm van ING kon niet automatisch openen.'}{' '}
           {amount
-            ? `Rond je donatie van ${formatEuro(amount)} daar af — vul hetzelfde bedrag in.`
+            ? `Rond je donatie van ${formatEuro(amount)} daar af. Vul hetzelfde bedrag in.`
             : 'Rond je donatie daar af.'}
         </p>
         {!ingOpened && (
