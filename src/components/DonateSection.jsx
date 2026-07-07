@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ING_URL } from '../lib/config.js'
+import { ING_URLS, ingUrlForAmount } from '../lib/config.js'
 import { submitPledge } from '../lib/pledges.js'
 import { formatEuro } from '../lib/format.js'
 
@@ -25,12 +25,16 @@ export default function DonateSection({ onPledged }) {
     submitPledge({ amount, name, message })
 
     // …en dan door naar het ING-betaalscherm (nieuw tabblad).
-    const opened = window.open(ING_URL, '_blank', 'noopener')
+    // Voor de vaste bedragen staat het bedrag daar al ingevuld.
+    const payUrl = ingUrlForAmount(amount)
+    const opened = window.open(payUrl, '_blank', 'noopener')
 
     onPledged({
       amount,
       name,
       message,
+      payUrl,
+      prefilled: Boolean(ING_URLS[amount]),
       timestamp: Date.now(),
       ingOpened: Boolean(opened),
     })
@@ -88,7 +92,7 @@ export default function DonateSection({ onPledged }) {
           />
         </div>
 
-        {ING_URL ? (
+        {ING_URLS.open ? (
           <button className="btn btn-gold btn-big" onClick={handleDonate}>
             {amount && !Number.isNaN(amount) && amount >= 1
               ? `Doneer ${formatEuro(amount)} via ING`

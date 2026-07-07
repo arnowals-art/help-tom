@@ -12,7 +12,7 @@ import ThankYou from './components/ThankYou.jsx'
 import Footer from './components/Footer.jsx'
 import ShareButtons from './components/ShareButtons.jsx'
 import HeartLine from './components/HeartLine.jsx'
-import { ING_URL } from './lib/config.js'
+import { ING_URLS } from './lib/config.js'
 import { fetchPledges } from './lib/pledges.js'
 import { fetchBankStats } from './lib/bank.js'
 import { DONATIONS } from './data/donations.js'
@@ -73,6 +73,8 @@ export default function App() {
       <ThankYou
         amount={lastPledge?.amount}
         ingOpened={lastPledge?.ingOpened}
+        payUrl={lastPledge?.payUrl}
+        prefilled={lastPledge?.prefilled}
         onBack={() => {
           setView('home')
           window.scrollTo(0, 0)
@@ -83,7 +85,7 @@ export default function App() {
 
   return (
     <>
-      {!ING_URL && (
+      {!ING_URLS.open && (
         <div className="demo-note">
           Voorbeeldversie: de doneerknop staat nog niet aan. Er kan nog geen
           geld worden overgemaakt.
