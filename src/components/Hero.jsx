@@ -18,19 +18,11 @@ export default function Hero() {
         </div>
 
         <div className="hero-photo">
-          {/*
-            Vervang deze placeholder door de echte familiefoto:
-            zet bijv. `familiefoto.jpg` in de map /public en gebruik
-            <img src="/familiefoto.jpg" alt="Tom met zijn kleinkind" />
-          */}
-          <div className="photo-placeholder">
-            <strong>Familiefoto</strong>
-            <span>
-              Plaats hier de foto van Tom met zijn kleinkind
-              <br />
-              (vervang de placeholder in Hero.jsx)
-            </span>
-          </div>
+          <img
+            className="site-photo"
+            src="tom-kleinkind.jpg"
+            alt="Tom met zijn eerste kleinkind op schoot"
+          />
         </div>
       </div>
 

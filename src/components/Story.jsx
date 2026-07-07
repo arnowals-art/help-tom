@@ -31,15 +31,14 @@ export default function Story() {
           </div>
 
           <div>
-            {/*
-              Vervang deze placeholder door een echte foto van Tom:
-              zet bijv. `tom.jpg` in de map /public en gebruik
-              <img src="/tom.jpg" alt="Tom" />
-            */}
-            <div className="photo-placeholder light">
-              <strong>Foto van Tom</strong>
-              <span>Plaats hier een persoonlijke foto (vervang in Story.jsx)</span>
-            </div>
+            <img
+              className="site-photo"
+              src="familiefoto.jpg"
+              alt="Tom en Reinet met hun kinderen en de hond op de heide"
+            />
+            <p className="photo-caption">
+              Tom en Reinet met de familie, op de heide bij Geldermalsen.
+            </p>
           </div>
         </div>
       </div>
