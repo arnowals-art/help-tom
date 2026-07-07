@@ -56,8 +56,10 @@
 
 export const ING_URL = 'https://www.ing.nl/payreq/m/?trxid=xZlbYma2K3nAoJUOaRRGQtZPNP1Z2Z3L'
 
-export const PLEDGE_FORM_ACTION = ''   // https://docs.google.com/forms/d/e/XXXX/formResponse
-export const PLEDGE_ENTRY_AMOUNT = ''  // entry.XXXXXXXXXX (hoort bij Bedrag)
-export const PLEDGE_ENTRY_NAME = ''    // entry.XXXXXXXXXX (hoort bij Naam)
-export const PLEDGE_ENTRY_MESSAGE = '' // entry.XXXXXXXXXX (hoort bij Bericht)
-export const SHEET_CSV_URL = ''        // https://docs.google.com/spreadsheets/d/e/XXXX/pub?output=csv
+export const PLEDGE_FORM_ACTION =
+  'https://docs.google.com/forms/d/e/1FAIpQLSd4pyyEgpYacXebu4JCMc9rxtY5mkqnk31oSfo0ngmmK8ow0g/formResponse'
+export const PLEDGE_ENTRY_AMOUNT = 'entry.629332172'  // Bedrag
+export const PLEDGE_ENTRY_NAME = 'entry.1843448379'   // Naam
+export const PLEDGE_ENTRY_MESSAGE = 'entry.643455977' // Bericht
+export const SHEET_CSV_URL =
+  'https://docs.google.com/spreadsheets/d/14AJEhtdxRAlNRgh6Zlrx6irdPD8PS5a5mOTKlnXGUGU/gviz/tq?tqx=out:csv'
