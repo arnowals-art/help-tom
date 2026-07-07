@@ -62,7 +62,11 @@ export default function App() {
   }, [view])
 
   const handlePledged = (pledge) => {
-    setOwnPledges((prev) => [...prev, pledge])
+    // Een herhaalde poging (bijv. na een mislukte betaling) telt
+    // niet nog een keer mee.
+    if (!pledge.duplicate) {
+      setOwnPledges((prev) => [...prev, pledge])
+    }
     setLastPledge(pledge)
     setView('thanks')
     window.scrollTo(0, 0)
@@ -75,6 +79,7 @@ export default function App() {
         ingOpened={lastPledge?.ingOpened}
         payUrl={lastPledge?.payUrl}
         prefilled={lastPledge?.prefilled}
+        duplicate={lastPledge?.duplicate}
         onBack={() => {
           setView('home')
           window.scrollTo(0, 0)

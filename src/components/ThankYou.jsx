@@ -2,7 +2,7 @@ import ShareButtons from './ShareButtons.jsx'
 import { formatEuro } from '../lib/format.js'
 import { ING_URLS } from '../lib/config.js'
 
-export default function ThankYou({ amount, ingOpened, payUrl, prefilled, onBack }) {
+export default function ThankYou({ amount, ingOpened, payUrl, prefilled, duplicate, onBack }) {
   return (
     <div className="thanks">
       <div className="thanks-card">
@@ -27,6 +27,19 @@ export default function ThankYou({ amount, ingOpened, payUrl, prefilled, onBack 
             </a>
           </p>
         )}
+        {duplicate && (
+          <p className="thanks-retry-note">
+            Je eerdere poging stond al genoteerd, dus je telt niet dubbel
+            mee.
+          </p>
+        )}
+        <p className="thanks-retry">
+          Betaling mislukt of afgebroken?{' '}
+          <a href={payUrl || ING_URLS.open} target="_blank" rel="noreferrer">
+            Probeer het hier opnieuw
+          </a>
+          . Je komt niet dubbel op de teller.
+        </p>
         <p>
           Je staat zo bij de steunbetuigingen op de pagina. Dank je wel,
           ook namens mijn vader en moeder.

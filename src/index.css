@@ -838,6 +838,24 @@ footer .footer-links {
   margin-bottom: 28px;
 }
 
+.thanks-retry {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.thanks-retry a {
+  color: #b4680a;
+  font-weight: 600;
+}
+
+.thanks-retry-note {
+  background: var(--gold-tint);
+  color: #8a5a10;
+  font-size: 0.88rem;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
 .thanks-demo {
   background: var(--gold-tint);
   color: #8a5a10;

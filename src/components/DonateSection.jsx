@@ -5,6 +5,39 @@ import { formatEuro } from '../lib/format.js'
 
 const PRESETS = [10, 25, 50, 100]
 
+// Onthoud de laatste toezegging in deze browser, zodat een mislukte
+// betaling opnieuw geprobeerd kan worden zonder dat dezelfde donatie
+// nóg een keer wordt geregistreerd.
+const DEDUPE_KEY = 'help-tom-laatste-toezegging'
+const DEDUPE_WINDOW_MS = 60 * 60 * 1000 // 1 uur
+
+function isRecentDuplicate(amount, name, message) {
+  try {
+    const raw = localStorage.getItem(DEDUPE_KEY)
+    if (!raw) return false
+    const last = JSON.parse(raw)
+    return (
+      last.amount === amount &&
+      last.name === name &&
+      last.message === message &&
+      Date.now() - last.at < DEDUPE_WINDOW_MS
+    )
+  } catch {
+    return false
+  }
+}
+
+function rememberPledge(amount, name, message) {
+  try {
+    localStorage.setItem(
+      DEDUPE_KEY,
+      JSON.stringify({ amount, name, message, at: Date.now() }),
+    )
+  } catch {
+    /* privémodus zonder opslag — dan geen deduplicatie */
+  }
+}
+
 export default function DonateSection({ onPledged }) {
   const [selected, setSelected] = useState(50)
   const [custom, setCustom] = useState('')
@@ -21,10 +54,16 @@ export default function DonateSection({ onPledged }) {
       return
     }
 
-    // Toezegging vastleggen voor de teller en de steunbetuigingen…
-    submitPledge({ amount, name, message })
+    // Toezegging vastleggen voor de teller en de steunbetuigingen —
+    // tenzij deze bezoeker net exact dezelfde toezegging deed
+    // (bijv. na een mislukte betaling): dan alleen opnieuw betalen.
+    const duplicate = isRecentDuplicate(amount, name, message)
+    if (!duplicate) {
+      submitPledge({ amount, name, message })
+      rememberPledge(amount, name, message)
+    }
 
-    // …en dan door naar het ING-betaalscherm (nieuw tabblad).
+    // Door naar het ING-betaalscherm (nieuw tabblad).
     // Voor de vaste bedragen staat het bedrag daar al ingevuld.
     const payUrl = ingUrlForAmount(amount)
     const opened = window.open(payUrl, '_blank', 'noopener')
@@ -34,6 +73,7 @@ export default function DonateSection({ onPledged }) {
       name,
       message,
       payUrl,
+      duplicate,
       prefilled: Boolean(ING_URLS[amount]),
       timestamp: Date.now(),
       ingOpened: Boolean(opened),
