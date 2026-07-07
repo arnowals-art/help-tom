@@ -3,7 +3,7 @@ import { ING_URLS, ingUrlForAmount } from '../lib/config.js'
 import { submitPledge } from '../lib/pledges.js'
 import { formatEuro } from '../lib/format.js'
 
-const PRESETS = [10, 50, 100]
+const PRESETS = [10, 25, 50, 100]
 
 export default function DonateSection({ onPledged }) {
   const [selected, setSelected] = useState(50)
