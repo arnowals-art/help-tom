@@ -524,6 +524,29 @@ section {
   color: #c3d2e8;
 }
 
+.iban-note {
+  max-width: 420px;
+  margin: 6px auto 26px;
+  background: var(--gold-tint);
+  border: 1px solid rgba(232, 160, 32, 0.5);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  text-align: center;
+}
+
+.iban-note .iban-number {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.iban-note strong {
+  color: #b4680a;
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
 .pay-fineprint {
   margin-top: 6px;
   font-size: 0.8rem;

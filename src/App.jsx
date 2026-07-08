@@ -80,6 +80,7 @@ export default function App() {
         payUrl={lastPledge?.payUrl}
         prefilled={lastPledge?.prefilled}
         duplicate={lastPledge?.duplicate}
+        transfer={lastPledge?.transfer}
         onBack={() => {
           setView('home')
           window.scrollTo(0, 0)

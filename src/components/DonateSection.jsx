@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ING_URLS, ingUrlForAmount } from '../lib/config.js'
 import { submitPledge } from '../lib/pledges.js'
 import { formatEuro } from '../lib/format.js'
+import { IBAN_DISPLAY, IBAN_NAME } from './IbanBlock.jsx'
 
 const PRESETS = [10, 25, 50, 100]
 
@@ -45,7 +46,8 @@ export default function DonateSection({ onPledged }) {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
-  const amount = custom !== '' ? Number(custom) : selected
+  const isCustom = custom !== ''
+  const amount = isCustom ? Number(custom) : selected
 
   const handleDonate = () => {
     setError('')
@@ -63,8 +65,24 @@ export default function DonateSection({ onPledged }) {
       rememberPledge(amount, name, message)
     }
 
-    // Door naar het ING-betaalscherm (nieuw tabblad).
-    // Voor de vaste bedragen staat het bedrag daar al ingevuld.
+    // Eigen bedrag: geen betaalverzoek maar een gewone overschrijving.
+    // (Een open ING-betaalverzoek kan maar beperkt gebruikt worden;
+    // een IBAN verloopt nooit.) De bedankpagina toont het
+    // rekeningnummer met kopieerknop.
+    if (isCustom) {
+      onPledged({
+        amount,
+        name,
+        message,
+        transfer: true,
+        duplicate,
+        timestamp: Date.now(),
+      })
+      return
+    }
+
+    // Vast bedrag: door naar het ING-betaalscherm (nieuw tabblad),
+    // met het bedrag al ingevuld.
     const payUrl = ingUrlForAmount(amount)
     const opened = window.open(payUrl, '_blank', 'noopener')
 
@@ -86,8 +104,8 @@ export default function DonateSection({ onPledged }) {
         <span className="section-label">Doneren</span>
         <h2 className="section-title">Help mee met de behandeling</h2>
         <p className="donate-sub">
-          Kies je bedrag, daarna opent het betaalscherm van ING. Alles wat
-          je kunt missen helpt ons. Dank je wel.
+          Alles wat je kunt missen helpt ons om het bedrag bij elkaar te
+          krijgen. Dank je wel.
         </p>
 
         <div className="amounts">
@@ -132,25 +150,24 @@ export default function DonateSection({ onPledged }) {
           />
         </div>
 
-        {ING_URLS.open ? (
-          <button className="btn btn-gold btn-big" onClick={handleDonate}>
-            {amount && !Number.isNaN(amount) && amount >= 1
-              ? `Doneer ${formatEuro(amount)} via ING`
-              : 'Doneer via ING'}
-          </button>
-        ) : (
-          /* De ING-link is nog niet ingesteld — zie src/lib/config.js */
-          <button className="btn btn-gold btn-big" disabled>
-            Doneerknop binnenkort actief
-          </button>
-        )}
+        <button className="btn btn-gold btn-big" onClick={handleDonate}>
+          {amount && !Number.isNaN(amount) && amount >= 1
+            ? isCustom
+              ? `Doneer ${formatEuro(amount)}`
+              : `Doneer ${formatEuro(amount)} via ING`
+            : 'Doneer'}
+        </button>
 
         {error && <p className="pay-error">{error}</p>}
 
         <p className="pay-note">
-          Je betaalt veilig via een betaalverzoek, rechtstreeks naar Tom.
-          Vul daar hetzelfde bedrag in. Werkt met elke Nederlandse bank,
-          niet alleen ING.
+          Vaste bedragen betaal je via een betaalverzoek, rechtstreeks naar
+          Tom. Kies je een eigen bedrag, dan krijg je het rekeningnummer om
+          zelf over te maken.
+        </p>
+        <p className="pay-fineprint">
+          Liever direct overmaken? Dat kan op {IBAN_DISPLAY} t.a.v.{' '}
+          {IBAN_NAME}.
         </p>
         <p className="pay-fineprint">Donaties zijn helaas niet fiscaal aftrekbaar</p>
       </div>
