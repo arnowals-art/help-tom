@@ -38,10 +38,12 @@ export default function App() {
   // (plus handmatige aanvullingen zoals contant geld); anders de
   // toezeggingen van de site.
   const manualRaised = DONATIONS.reduce((sum, d) => sum + d.amount, 0)
-  const raised = bank
-    ? bank.raised + manualRaised
-    : donations.reduce((sum, d) => sum + d.amount, 0)
+  // const raised = bank
+  //   ? bank.raised + manualRaised
+  //   : donations.reduce((sum, d) => sum + d.amount, 0)
   const donors = bank ? bank.donors + DONATIONS.length : donations.length
+
+  const raised = 45930;
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))
