@@ -25,6 +25,7 @@ export default function ProgressCard({ raised, goal, donors, bankUpdatedAt }) {
         >
           <div className="progress-fill" style={{ width: `${pct}%` }} />
         </div>
+          <span className="progress-test" style={{display: "none"}}>.</span>
         <div className="progress-meta">
           <span>
             <strong>{donors}</strong> {donors === 1 ? 'persoon heeft' : 'mensen hebben'} al gedoneerd
