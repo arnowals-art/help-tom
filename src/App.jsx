@@ -43,7 +43,7 @@ export default function App() {
   //   : donations.reduce((sum, d) => sum + d.amount, 0)
   const donors = bank ? bank.donors + DONATIONS.length : donations.length
 
-  const raised = 45930;
+  const raised = 34993.50;
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))

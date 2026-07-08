@@ -31,9 +31,14 @@ export default function ProgressCard({ raised, goal, donors, bankUpdatedAt }) {
           </span>
           <span className="urgency">De ziekte gaat door, dus elke dag telt</span>
         </div>
-        {updatedLabel && (
+        {updatedLabel ? (
           <p className="bank-note">
             Stand van de rekening, automatisch bijgewerkt ({updatedLabel})
+          </p>
+        ) : (
+          <p className="bank-note">
+            Dit bedrag wordt periodiek bijgewerkt. Door de vele donaties kan de
+            actuele stand iets achterlopen.
           </p>
         )}
       </div>
