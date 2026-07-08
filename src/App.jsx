@@ -43,7 +43,7 @@ export default function App() {
   //   : donations.reduce((sum, d) => sum + d.amount, 0)
   const donors = bank ? bank.donors + DONATIONS.length : donations.length
 
-  const raised = 34993.50;
+  const raised = 37780;
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))
@@ -72,6 +72,12 @@ export default function App() {
     setLastPledge(pledge)
     setView('thanks')
     window.scrollTo(0, 0)
+  }
+
+  // Een achtergelaten bericht verschijnt meteen bij de steunbetuigingen,
+  // zonder paginawissel (de donatie zelf loopt via de bankrekening).
+  const handleMessagePosted = (msg) => {
+    setOwnPledges((prev) => [...prev, msg])
   }
 
   if (view === 'thanks') {
@@ -114,7 +120,7 @@ export default function App() {
       <HeartLine className="heartline-divider" color="#1B3A6B" />
       <Updates />
       <DonationWall donations={donations} />
-      <DonateSection onPledged={handlePledged} />
+      <DonateSection onMessagePosted={handleMessagePosted} />
 
       <div className="share-section">
         <div className="container narrow">

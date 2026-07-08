@@ -48,3 +48,6 @@ export const PLEDGE_ENTRY_MESSAGE = 'entry.643455977' // Bericht
 
 export const SHEET_CSV_URL =
   'https://docs.google.com/spreadsheets/d/14AJEhtdxRAlNRgh6Zlrx6irdPD8PS5a5mOTKlnXGUGU/gviz/tq?tqx=out:csv'
+
+// export const SHEET_CSV_URL =
+//   '/data.csv'

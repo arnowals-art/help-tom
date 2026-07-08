@@ -27,7 +27,7 @@ export default function ProgressCard({ raised, goal, donors, bankUpdatedAt }) {
         </div>
         <div className="progress-meta">
           <span>
-            <strong>{donors}</strong> {donors === 1 ? 'persoon heeft' : 'mensen hebben'} al gedoneerd
+            <strong>{donors}</strong> {donors === 1 ? 'steunbetuiging' : 'steunbetuigingen'}
           </span>
           <span className="urgency">De ziekte gaat door, dus elke dag telt</span>
         </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { formatEuro } from '../lib/format.js'
 
 const SHOW_FIRST = 8
+const SHOW_STEP = 8
 
 function timeAgo(timestamp) {
   if (!timestamp) return ''
@@ -20,22 +20,24 @@ function timeAgo(timestamp) {
 }
 
 export default function DonationWall({ donations }) {
-  const [showAll, setShowAll] = useState(false)
+  // Aantal zichtbare berichten; groeit met SHOW_STEP per klik.
+  const [visibleCount, setVisibleCount] = useState(SHOW_FIRST)
 
   // Nieuwste bovenaan: handmatige lijst staat al op volgorde,
   // entries met timestamp worden daarbinnen gesorteerd.
   const sorted = [...donations].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-  const visible = showAll ? sorted : sorted.slice(0, SHOW_FIRST)
+  const visible = sorted.slice(0, visibleCount)
+  const remaining = sorted.length - visible.length
 
   return (
     <section className="wall" id="steunbetuigingen">
       <div className="container narrow">
         <span className="section-label">Steunbetuigingen</span>
-        <h2 className="section-title">Zij doneerden al</h2>
+        <h2 className="section-title">Bemoedigingen voor Tom</h2>
 
         {sorted.length === 0 ? (
           <div className="wall-empty">
-            <p>Er zijn nog geen donaties.</p>
+            <p>Er zijn nog geen berichten.</p>
             <p>
               <a href="#doneer">Jij kunt de eerste zijn.</a>
             </p>
@@ -53,7 +55,6 @@ export default function DonationWall({ donations }) {
                     <div className="wall-body">
                       <div className="wall-head">
                         <strong>{name}</strong>
-                        <span className="wall-amount">{formatEuro(d.amount)}</span>
                         <span className="wall-time">{d.date || timeAgo(d.timestamp)}</span>
                       </div>
                       {d.message?.trim() && <p className="wall-message">{d.message}</p>}
@@ -63,9 +64,12 @@ export default function DonationWall({ donations }) {
               })}
             </div>
 
-            {sorted.length > SHOW_FIRST && !showAll && (
-              <button className="btn btn-outline wall-more" onClick={() => setShowAll(true)}>
-                Toon alle {sorted.length} donaties
+            {remaining > 0 && (
+              <button
+                className="btn btn-outline wall-more"
+                onClick={() => setVisibleCount((n) => n + SHOW_STEP)}
+              >
+                Toon meer ({remaining} resterend)
               </button>
             )}
           </>

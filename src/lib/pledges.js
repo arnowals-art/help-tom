@@ -14,7 +14,9 @@ export const PLEDGES_CONFIGURED = Boolean(PLEDGE_FORM_ACTION && PLEDGE_ENTRY_AMO
 export function submitPledge({ amount, name = '', message = '' }) {
   if (!PLEDGES_CONFIGURED) return
   const data = new URLSearchParams()
-  data.append(PLEDGE_ENTRY_AMOUNT, String(amount))
+  // Bedrag is optioneel: een bericht achterlaten kan zonder bedrag
+  // (de donatie zelf loopt via de bankoverschrijving).
+  if (amount != null && amount !== '') data.append(PLEDGE_ENTRY_AMOUNT, String(amount))
   if (PLEDGE_ENTRY_NAME) data.append(PLEDGE_ENTRY_NAME, name)
   if (PLEDGE_ENTRY_MESSAGE) data.append(PLEDGE_ENTRY_MESSAGE, message)
   fetch(PLEDGE_FORM_ACTION, {
@@ -117,19 +119,25 @@ export async function fetchPledges() {
     const rows = parseCsv(await res.text())
     const list = rows
       .slice(1) // koprij overslaan
-      .map((cols, i) => ({
-        amount: Number(
+      .map((cols, i) => {
+        const parsed = Number(
           String(cols[1] || '').replace(',', '.').replace(/[^\d.]/g, ''),
-        ),
-        name: (cols[2] || '').trim(),
-        message: (cols[3] || '').trim(),
-        date: (cols[0] || '').split(' ')[0],
-        time: parseTimestamp(cols[0]),
-        // rijvolgorde = tijdsvolgorde; hiermee sorteert de muur
-        // nieuwste bovenaan
-        timestamp: i + 1,
-      }))
-      .filter((d) => Number.isFinite(d.amount) && d.amount >= 1)
+        )
+        return {
+          // Bedrag is optioneel (0 als er geen bedrag is); de muur toont
+          // het niet meer, maar 0 houdt de deduplicatie werkbaar.
+          amount: Number.isFinite(parsed) ? parsed : 0,
+          name: (cols[2] || '').trim(),
+          message: (cols[3] || '').trim(),
+          date: (cols[0] || '').split(' ')[0],
+          time: parseTimestamp(cols[0]),
+          // rijvolgorde = tijdsvolgorde; hiermee sorteert de muur
+          // nieuwste bovenaan
+          timestamp: i + 1,
+        }
+      })
+      // Toon rijen met een naam of bericht (of, uit oudere data, een bedrag).
+      .filter((d) => d.name || d.message || d.amount > 0)
     return removeDuplicates(list)
   } catch {
     return [] // spreadsheet even niet bereikbaar — site blijft werken

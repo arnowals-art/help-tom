@@ -185,7 +185,7 @@ section {
   box-shadow: 0 6px 24px rgba(232, 160, 32, 0.4);
 }
 
-.btn-gold:hover {
+.btn-gold:not(:disabled):hover {
   background: var(--gold-soft);
   transform: translateY(-2px);
 }
@@ -202,7 +202,7 @@ section {
   font-weight: 600;
 }
 
-.btn-outline:hover {
+.btn-outline:not(:disabled):hover {
   border-color: var(--gold);
 }
 
@@ -561,6 +561,93 @@ section {
   margin-top: 16px;
   color: #ffd9a1;
   font-weight: 600;
+}
+
+/* ---------------- Bankrekening (kopieerbaar) ---------------- */
+
+.bank-card {
+  display: grid;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto 16px;
+}
+
+.bank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  background: var(--gold-tint);
+  border: 1px solid rgba(232, 160, 32, 0.5);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.bank-row:hover {
+  border-color: var(--gold);
+}
+
+.bank-row:active {
+  transform: translateY(1px);
+}
+
+.bank-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.bank-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+
+.bank-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #b4680a;
+  letter-spacing: 0.03em;
+  word-break: break-word;
+}
+
+.bank-copy {
+  flex: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: rgba(232, 160, 32, 0.25);
+  border-radius: 999px;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+/* ---------------- Bericht achterlaten ---------------- */
+
+.message-form {
+  margin-top: 44px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.message-title {
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.message-thanks {
+  margin-top: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-soft);
 }
 
 /* ---------------- Naam & bericht bij doneren ---------------- */
