@@ -66,6 +66,46 @@ function parseCsv(text) {
   return rows
 }
 
+// Tijdstempel uit het formulier ("7-7-2026 21:39:34") naar millis.
+function parseTimestamp(s) {
+  const m = String(s)
+    .trim()
+    .match(/^(\d{1,2})-(\d{1,2})-(\d{4})[ T](\d{1,2}):(\d{2}):(\d{2})$/)
+  if (!m) return null
+  return new Date(+m[3], +m[2] - 1, +m[1], +m[4], +m[5], +m[6]).getTime()
+}
+
+// Identieke inzendingen (zelfde bedrag, naam én bericht) binnen dit
+// tijdsvenster tellen als één donatie. Dit vangt dubbele registraties
+// op na een mislukte betaling: mensen proberen het dan binnen een
+// paar minuten opnieuw.
+//
+// BELANGRIJK: volledig anonieme rijen zonder bericht worden NOOIT
+// samengevoegd. Twee anonieme gevers met hetzelfde bedrag kort na
+// elkaar zijn niet te onderscheiden van een dubbele registratie;
+// die controleer je handmatig met de bankapp ernaast.
+const DUPLICATE_WINDOW_MS = 5 * 60 * 1000
+
+function removeDuplicates(list) {
+  const kept = []
+  for (const p of list) {
+    const identifiable = p.name !== '' || p.message !== ''
+    const isDuplicate =
+      identifiable &&
+      kept.some(
+        (k) =>
+          k.amount === p.amount &&
+          k.name === p.name &&
+          k.message === p.message &&
+          k.time != null &&
+          p.time != null &&
+          p.time - k.time < DUPLICATE_WINDOW_MS,
+      )
+    if (!isDuplicate) kept.push(p)
+  }
+  return kept
+}
+
 // Haalt de toezeggingen op uit de gepubliceerde spreadsheet.
 // Kolommen: Tijdstempel, Bedrag, Naam, Bericht (de vaste volgorde
 // van het Google Formulier).
@@ -75,7 +115,7 @@ export async function fetchPledges() {
     const res = await fetch(SHEET_CSV_URL)
     if (!res.ok) return []
     const rows = parseCsv(await res.text())
-    return rows
+    const list = rows
       .slice(1) // koprij overslaan
       .map((cols, i) => ({
         amount: Number(
@@ -84,11 +124,13 @@ export async function fetchPledges() {
         name: (cols[2] || '').trim(),
         message: (cols[3] || '').trim(),
         date: (cols[0] || '').split(' ')[0],
+        time: parseTimestamp(cols[0]),
         // rijvolgorde = tijdsvolgorde; hiermee sorteert de muur
         // nieuwste bovenaan
         timestamp: i + 1,
       }))
       .filter((d) => Number.isFinite(d.amount) && d.amount >= 1)
+    return removeDuplicates(list)
   } catch {
     return [] // spreadsheet even niet bereikbaar — site blijft werken
   }
