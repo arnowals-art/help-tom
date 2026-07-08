@@ -15,9 +15,12 @@ import HeartLine from './components/HeartLine.jsx'
 import { ING_URLS } from './lib/config.js'
 import { fetchPledges } from './lib/pledges.js'
 import { fetchBankStats } from './lib/bank.js'
+import { fetchRaised } from './lib/amount.js'
 import { DONATIONS } from './data/donations.js'
 
 const GOAL = 100000
+// Terugvalwaarde als amount.json niet geladen kan worden (teller nooit €0).
+const FALLBACK_RAISED = 37780
 
 export default function App() {
   // Toezeggingen uit de Google Spreadsheet (zie src/lib/config.js)
@@ -26,6 +29,8 @@ export default function App() {
   const [ownPledges, setOwnPledges] = useState([])
   // Echte bankstand via de bankkoppeling (zie src/lib/bank.js)
   const [bank, setBank] = useState(null)
+  // Handmatig ingevoerd bedrag uit amount.json (zie src/lib/amount.js)
+  const [raisedOverride, setRaisedOverride] = useState(null)
   const [view, setView] = useState('home')
   const [lastPledge, setLastPledge] = useState(null)
   const [donateVisible, setDonateVisible] = useState(false)
@@ -43,11 +48,13 @@ export default function App() {
   //   : donations.reduce((sum, d) => sum + d.amount, 0)
   const donors = bank ? bank.donors + DONATIONS.length : donations.length
 
-  const raised = 37780;
+  // Bedrag uit amount.json indien beschikbaar, anders de terugvalwaarde.
+  const raised = raisedOverride != null ? raisedOverride : FALLBACK_RAISED
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))
     fetchBankStats().then(setBank)
+    fetchRaised().then((value) => value != null && setRaisedOverride(value))
   }, [])
 
   // Verberg de sticky doneerbalk zodra de doneersectie in beeld is.
