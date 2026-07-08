@@ -19,8 +19,6 @@ import { fetchRaised } from './lib/amount.js'
 import { DONATIONS } from './data/donations.js'
 
 const GOAL = 100000
-// Terugvalwaarde als amount.json niet geladen kan worden (teller nooit €0).
-const FALLBACK_RAISED = 37780
 
 export default function App() {
   // Toezeggingen uit de Google Spreadsheet (zie src/lib/config.js)
@@ -48,8 +46,15 @@ export default function App() {
   //   : donations.reduce((sum, d) => sum + d.amount, 0)
   const donors = bank ? bank.donors + DONATIONS.length : donations.length
 
-  // Bedrag uit amount.json indien beschikbaar, anders de terugvalwaarde.
-  const raised = raisedOverride != null ? raisedOverride : FALLBACK_RAISED
+  // Het getoonde "opgehaald"-bedrag komt uit amount.json. Dat bestand
+  // bestaat ALLEEN op de gh-pages-branch (de live site), NIET in deze
+  // repo/main en dus ook niet lokaal. Daarom:
+  //   - live (gh-pages): raisedOverride = het bedrag uit amount.json
+  //   - lokaal / als amount.json ontbreekt: raisedOverride blijft null
+  //     → terugval op een streepje ("—") in de teller.
+  // Het bedrag bijwerken doe je door raised in amount.json op de
+  // gh-pages-branch aan te passen (zie CLAUDE.md), niet in de code.
+  const raised = raisedOverride
 
   useEffect(() => {
     fetchPledges().then((list) => list.length && setPledges(list))
