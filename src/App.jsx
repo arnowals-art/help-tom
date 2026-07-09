@@ -5,6 +5,7 @@ import Story from './components/Story.jsx'
 import Treatment from './components/Treatment.jsx'
 import WhyDonate from './components/WhyDonate.jsx'
 import Updates from './components/Updates.jsx'
+import FamilyNote from './components/FamilyNote.jsx'
 import DonationWall from './components/DonationWall.jsx'
 import DonateSection from './components/DonateSection.jsx'
 import StickyDonate from './components/StickyDonate.jsx'
@@ -125,6 +126,7 @@ export default function App() {
         donors={donors}
         bankUpdatedAt={bank?.updatedAt}
       />
+      <FamilyNote />
       <Story />
       <HeartLine className="heartline-divider" color="#1B3A6B" />
       <Treatment />
