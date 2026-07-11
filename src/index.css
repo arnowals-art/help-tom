@@ -288,7 +288,7 @@ section {
 /* ---------------- Bericht van de familie ---------------- */
 
 .family-note-wrap {
-  max-width: 880px;
+  max-width: 1080px;
 }
 
 #bericht-familie {
@@ -297,25 +297,150 @@ section {
   margin-top: 36px;
 }
 
+/* Carousel */
+.quote-carousel {
+  position: relative;
+  --quote-pad: 56px;
+  --quote-dots-space: 32px;
+}
+
+.quote-viewport {
+  overflow: hidden;
+  padding: 0 var(--quote-pad) var(--quote-dots-space);
+}
+
+.quote-track {
+  display: flex;
+  gap: var(--quote-pad);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  touch-action: pan-y;
+}
+
+.quote-track.is-dragging {
+  transition: none;
+}
+
+.quote-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.quote-nav {
+  position: absolute;
+  top: calc(50% + 18px);
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  opacity: .5;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.quote-nav:hover {
+  opacity: 1;
+}
+
+.quote-nav-prev {
+  left: 2px;
+}
+
+.quote-nav-next {
+  right: 2px;
+}
+
+.quote-nav:hover:not(:disabled) {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.quote-nav:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quote-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--quote-dots-space);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quote-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--navy);
+  opacity: 0.25;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.quote-dot.is-active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 .family-note {
   position: relative;
   padding: 64px 24px 8px;
   text-align: center;
 }
 
-.family-note::before {
-  content: '\201C';
-  position: absolute;
-  top: 0.05em;
-  left: 0;
-  font-family: var(--font-head);
-  font-size: 16rem;
-  line-height: 1;
-  color: var(--navy);
-  opacity: 0.07;
-  pointer-events: none;
-  z-index: 0;
+.family-note.has-image {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  text-align: left;
 }
+
+.family-note.has-image .quote-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.family-note .quote-image {
+  flex: 0 0 40%;
+}
+
+.family-note .quote-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/*.family-note::before {*/
+/*  content: '\201C';*/
+/*  position: absolute;*/
+/*  top: 0.05em;*/
+/*  left: 24px;*/
+/*  font-family: var(--font-head);*/
+/*  font-size: 16rem;*/
+/*  line-height: 1;*/
+/*  color: var(--navy);*/
+/*  opacity: 0.07;*/
+/*  pointer-events: none;*/
+/*  z-index: 0;*/
+/*}*/
+
+/*.family-note.has-image::before {*/
+/*  top: 0.18em;*/
+/*}*/
 
 .family-note blockquote {
   position: relative;
@@ -326,6 +451,20 @@ section {
   line-height: 1.55;
   color: var(--ink-soft);
 }
+
+/*.family-note blockquote::before {*/
+/*  content: '\201C';*/
+/*  position: absolute;*/
+/*  top: -0.195em;*/
+/*  left: -0.2em;*/
+/*  font-family: var(--font-head);*/
+/*  font-size: 16rem;*/
+/*  line-height: 1;*/
+/*  color: var(--navy);*/
+/*  opacity: 0.07;*/
+/*  pointer-events: none;*/
+/*  z-index: 0;*/
+/*}*/
 
 .family-note blockquote p + p {
   margin-top: 16px;
@@ -341,23 +480,66 @@ section {
   color: var(--navy-deep);
 }
 
-@media (max-width: 600px) {
+.timeline-ul-list {
+
+}
+
+@media (max-width: 720px) {
   #bericht-familie {
     padding: 24px 0;
+  }
+
+  .quote-carousel {
+    --quote-pad: 40px;
+  }
+
+  .quote-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .family-note-wrap {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .family-note-wrap .family-note blockquote::before {
+    font-size: 11rem;
   }
 
   .family-note {
     padding: 24px 8px 4px;
   }
 
+  .family-note.has-image {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .family-note.has-image img {
+    max-width: 400px;
+    justify-self: center;
+  }
+
+  .family-note.has-image .quote-body,
+  .family-note .quote-image {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
   .family-note::before {
     top: -0.05em;
-    left: -0.03em;
+    left: 8px;
     font-size: 10rem;
   }
 
   .family-note blockquote {
     font-size: 1rem;
+  }
+
+  .quote-nav {
+    opacity: 1;
   }
 }
 
@@ -507,6 +689,21 @@ section {
 .timeline-item p {
   margin-top: 4px;
   font-size: 1.05rem;
+}
+
+.timeline p + ul,
+.timeline p + p,
+.timeline ul + p {
+  margin-top: 14px;
+}
+
+.timeline ul {
+  list-style-type: square;
+  margin-left: 16px;
+}
+
+.timeline ul li::marker{
+  color: var(--navy);
 }
 
 /* ---------------- Doneer sectie ---------------- */
