@@ -124,7 +124,6 @@ export default function App() {
         raised={raised}
         goal={GOAL}
         donors={donors}
-        bankUpdatedAt={bank?.updatedAt}
       />
       <FamilyNote />
       <Story />
@@ -140,8 +139,7 @@ export default function App() {
         <div className="container narrow">
           <h2>Deel deze pagina</h2>
           <p>
-            Ken je mensen die zouden willen helpen? Stuur ze deze pagina
-            door. Dat helpt net zo goed als een donatie.
+            Wil je deze pagina delen? Dat kan met de onderstaande links.
           </p>
           <ShareButtons />
         </div>

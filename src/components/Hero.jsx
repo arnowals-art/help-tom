@@ -11,13 +11,9 @@ export default function Hero() {
             komt hij niet in aanmerking voor de behandeling die hem kan
             helpen. In Israël wel, maar die moeten we zelf betalen.
           </p>
-          <a href="#doneer" className="btn btn-gold btn-big">
-            Doneer voor Toms behandeling
+          <a href="#updates" className="btn btn-gold btn-big">
+            Lees het laatste nieuws hier →
           </a>
-          <p className="hero-cta-note">
-            Veilig betalen via betaalverzoek, rechtstreeks naar Tom. Elk
-            bedrag helpt.
-          </p>
         </div>
 
         <div className="hero-photo">

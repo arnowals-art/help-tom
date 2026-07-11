@@ -92,13 +92,17 @@ section {
   max-width: 46ch;
 }
 
-.hero-cta-note {
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: #a8bbd8;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.hero-chip {
+  display: block;
+  width: fit-content;
+  margin-bottom: 16px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #eafaf0;
+  background: rgba(46, 139, 87, 0.25);
+  border: 1px solid rgba(87, 199, 133, 0.55);
 }
 
 .heartline-wrap {
@@ -257,7 +261,7 @@ section {
   height: 100%;
   min-width: 14px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  background: linear-gradient(90deg, #2e8b57, #57c785);
   transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -272,8 +276,8 @@ section {
 }
 
 .urgency {
-  color: #b4680a;
-  background: var(--gold-tint);
+  color: #1f6b43;
+  background: rgba(46, 139, 87, 0.14);
   padding: 3px 12px;
   border-radius: 999px;
   font-weight: 600;
@@ -281,8 +285,24 @@ section {
 
 .bank-note {
   margin-top: 12px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--ink-soft);
+}
+
+.news-link {
+  color: #2e8b57;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 139, 87, 0.4);
+  transition: border-color 0.2s;
+}
+
+.news-link:hover {
+  border-bottom-color: #2e8b57;
+}
+
+#updates {
+  scroll-margin-top: 24px;
 }
 
 /* ---------------- Bericht van de familie ---------------- */
@@ -724,6 +744,11 @@ section {
   margin: 0 auto 36px;
 }
 
+.donate-sub span + span {
+  display: inline-block;
+  margin-top: 14px;
+}
+
 .amounts {
   display: flex;
   flex-wrap: wrap;
@@ -1095,7 +1120,7 @@ section {
 footer {
   background: var(--navy-deep);
   color: #a8bbd8;
-  padding: 56px 0 96px;
+  padding: 56px 0 24px;
   text-align: center;
   font-size: 0.95rem;
 }
@@ -1331,6 +1356,11 @@ footer .footer-links {
 
   body {
     padding-bottom: 0;
+  }
+
+
+  footer {
+    padding: 56px 0 96px;
   }
 }
 

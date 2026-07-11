@@ -38,6 +38,13 @@ const ArrowRight = () => (
 
 const quotes = [
   {
+    paragraphs: [
+      'Na de Heere willen wij iedereen heel hartelijk bedanken voor jullie medeleven en bovenal voor het gebed.',
+      'In vier dagen tijd is het ongelofelijke bedrag van €100.000 opgehaald. We zijn er stil van en diep dankbaar.',
+      'De donatieknop hebben we inmiddels verwijderd. Voor verdere updates over de behandeling in Israel kunt u deze website blijven volgen.',
+    ],
+  },
+  {
     image: {
       src: 'kringloop.jpg',
       alt: 'Kringloopwinkel in Geldermalsen',

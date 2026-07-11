@@ -1,5 +1,3 @@
-import ShareButtons from './ShareButtons.jsx'
-
 export default function Footer() {
   return (
     <footer>
@@ -10,7 +8,6 @@ export default function Footer() {
             Vragen? Mail naar <a href="mailto:arnowals@icloud.com">arnowals@icloud.com</a>
           </span>
         </div>
-        <ShareButtons />
       </div>
     </footer>
   )
