@@ -17,8 +17,8 @@ export default function StickyDonate({ raised, goal, hidden }) {
           <div className="mini-fill" style={{ width: `${pct}%` }} />
         </div>
       </div>
-      <a href="#doneer" className="btn btn-gold">
-        Doneer nu
+      <a href="#updates" className="btn btn-gold">
+        Laatste nieuws
       </a>
     </div>
   )

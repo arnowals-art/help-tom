@@ -1195,7 +1195,7 @@ footer .footer-links {
 .sticky-donate .mini-fill {
   height: 100%;
   min-width: 6px;
-  background: var(--gold);
+  background: linear-gradient(90deg, #2e8b57, #57c785);
   border-radius: 999px;
 }
 
