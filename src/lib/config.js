@@ -46,8 +46,8 @@ export const PLEDGE_ENTRY_AMOUNT = 'entry.629332172'  // Bedrag
 export const PLEDGE_ENTRY_NAME = 'entry.1843448379'   // Naam
 export const PLEDGE_ENTRY_MESSAGE = 'entry.643455977' // Bericht
 
-// export const SHEET_CSV_URL =
-//   'https://docs.google.com/spreadsheets/d/14AJEhtdxRAlNRgh6Zlrx6irdPD8PS5a5mOTKlnXGUGU/gviz/tq?tqx=out:csv'
-
 export const SHEET_CSV_URL =
-  '/data.csv'
+  'https://docs.google.com/spreadsheets/d/14AJEhtdxRAlNRgh6Zlrx6irdPD8PS5a5mOTKlnXGUGU/gviz/tq?tqx=out:csv'
+
+// export const SHEET_CSV_URL =
+//   '/data.csv'
