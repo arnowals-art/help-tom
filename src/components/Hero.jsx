@@ -12,7 +12,7 @@ export default function Hero() {
             helpen. In Israël wel, maar die moeten we zelf betalen.
           </p>
           <a href="#updates" className="btn btn-gold btn-big">
-            Lees het laatste nieuws hier →
+            Lees het laatste nieuws →
           </a>
         </div>
 
