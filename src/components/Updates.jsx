@@ -1,5 +1,5 @@
-// Voeg hier nieuwe updates toe (nieuwste bovenaan).
-const UPDATES = [
+
+export const UPDATES = [
   {
     date: '14 juli 2026',
     text: <>
@@ -39,9 +39,14 @@ export default function Updates() {
         <h2 className="section-title">Hoe het met Tom gaat</h2>
         <div className="timeline">
           {UPDATES.map((u) => (
-            <div className="timeline-item" key={u.date + u.text}>
+            <div className="timeline-item" key={u.date}>
               <span className="timeline-date">{u.date}</span>
               {u.text}
+              {u.slug && (
+                <a className="timeline-link" href={`./${u.slug}.html`}>
+                  Lees deze update op een eigen pagina →
+                </a>
+              )}
             </div>
           ))}
         </div>

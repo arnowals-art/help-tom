@@ -126,12 +126,12 @@ export default function App() {
         donors={donors}
       />
       <FamilyNote />
-      <Story />
+      <Updates />
       <HeartLine className="heartline-divider" color="#1B3A6B" />
+      <Story />
       <Treatment />
       <WhyDonate />
       <HeartLine className="heartline-divider" color="#1B3A6B" />
-      <Updates />
       <DonationWall donations={donations} />
       <DonateSection onMessagePosted={handleMessagePosted} />
 

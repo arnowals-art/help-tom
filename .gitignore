@@ -4,4 +4,7 @@ dist
 *.local
 local-files/
 .idea
+.vite
 public/data.csv
+# Automatisch gegenereerd uit src/pages/ (zie plugins/update-pages.js)
+/generated/

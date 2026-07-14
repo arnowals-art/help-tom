@@ -7,7 +7,9 @@ const SHARE_TEXT =
   'aanmerking voor de behandeling die hem kan helpen, in Israël wel. We ' +
   'proberen het geld samen bij elkaar te krijgen. Lees zijn verhaal: '
 
-export default function ShareButtons() {
+// `text` en `title` zijn de tekst waarmee de pagina gedeeld wordt. Zonder
+// die props delen we het verhaal van de campagne (de homepage).
+export default function ShareButtons({ text = SHARE_TEXT, title = 'Help Tom' }) {
   const [copied, setCopied] = useState(false)
 
   // Volledige URL inclusief pad (belangrijk op bijv. GitHub Pages,
@@ -37,7 +39,7 @@ export default function ShareButtons() {
   const shareInstagram = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Help Tom', text: SHARE_TEXT, url })
+        await navigator.share({ title, text, url })
         return
       } catch {
         /* gebruiker annuleerde — val terug op kopiëren */
@@ -50,7 +52,7 @@ export default function ShareButtons() {
     <div className="share-row">
       <a
         className="share-btn"
-        href={`https://wa.me/?text=${encodeURIComponent(SHARE_TEXT + url)}`}
+        href={`https://wa.me/?text=${encodeURIComponent(text + url)}`}
         target="_blank"
         rel="noreferrer"
       >

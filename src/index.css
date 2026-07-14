@@ -1369,3 +1369,200 @@ footer .footer-links {
     animation: none !important;
   }
 }
+
+/* ---------------- Update-detailpagina ---------------- */
+
+.post-hero {
+  background: linear-gradient(175deg, var(--navy-deep) 0%, var(--navy) 60%, #24457c 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.post-hero-inner {
+  padding: 32px 24px 96px;
+}
+
+.post-hero h1 {
+  color: var(--white);
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  margin-bottom: 18px;
+}
+
+.post-back {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #cdd9ec;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-back:hover {
+  color: var(--gold-soft);
+}
+
+/* Optionele foto onder de titel */
+.post-photo {
+  margin: 32px 0 0;
+}
+
+.post-photo .site-photo {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.post-intro {
+  margin-bottom: 0;
+  max-width: 56ch;
+}
+
+/* Het artikel zelf: iets ruimer gezet dan de rest van de site */
+.post-body {
+  padding: 72px 0 56px;
+}
+
+.post-body .prose > p:first-child {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.post-body p {
+  margin-bottom: 22px;
+  font-size: 1.08rem;
+}
+
+.post-body ul,
+.post-body ol {
+  margin: 0 0 22px 22px;
+  display: grid;
+  gap: 10px;
+  font-size: 1.08rem;
+}
+
+.post-body li::marker {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.post-body h2 {
+  font-size: 1.5rem;
+  margin: 44px 0 16px;
+}
+
+.post-body h3 {
+  font-size: 1.15rem;
+  margin: 32px 0 12px;
+}
+
+.post-body strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.post-body a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--gold);
+}
+
+.post-body a:hover {
+  color: var(--gold);
+}
+
+.post-body blockquote {
+  margin: 32px 0;
+  padding: 4px 0 4px 24px;
+  border-left: 3px solid var(--gold);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--navy);
+}
+
+.post-body blockquote p {
+  margin-bottom: 8px;
+  font-size: inherit;
+}
+
+.post-body blockquote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Uitgelicht kadertje voor iets dat opvalt (bijv. een oproep) */
+.post-callout {
+  margin: 32px 0;
+  padding: 24px 28px;
+  border-radius: var(--radius);
+  background: var(--gold-tint);
+  border: 1px solid rgba(232, 160, 32, 0.35);
+}
+
+.post-callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Foto middenin het artikel */
+.post-body figure {
+  margin: 36px 0;
+}
+
+.post-body figcaption {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* Deel-/doneerblok onder het artikel */
+.post-help {
+  background: var(--gold-tint);
+  text-align: center;
+  padding: 56px 0;
+}
+
+.post-help h2 {
+  margin-bottom: 24px;
+}
+
+.post-more {
+  background: var(--white);
+}
+
+.post-more-all {
+  margin-top: 32px;
+}
+
+.timeline-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--gold);
+  transition: color 0.2s ease;
+}
+
+.timeline-link:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .post-hero-inner {
+    padding: 24px 24px 80px;
+  }
+
+  .post-photo .site-photo {
+    aspect-ratio: 4 / 3;
+  }
+}
