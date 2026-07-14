@@ -1,6 +1,14 @@
 // Voeg hier nieuwe updates toe (nieuwste bovenaan).
 const UPDATES = [
   {
+    date: '14 juli 2026',
+    text: <>
+      <p>De vertrekdatum naar Israël is definitief vastgesteld op zaterdag 25 juli in de avond.</p>
+      <p>Het verblijf zal naar verwachting ongeveer 10 weken duren in plaats van de eerder genoemde 7 weken. De reden hiervoor is dat pa's medicatie de eerste drie weken onder begeleiding van het ziekenhuis moet worden afgebouwd. Pas daarna kan de behandeling worden gestart.
+      </p>
+    </>,
+  },
+  {
     date: '11 juli 2026',
     text: <>
       <p>Alle voorbereidingen voor het vertrek op zaterdag 25 juli zijn in volle gang. </p>
