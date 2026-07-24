@@ -1,5 +1,5 @@
 
-// De WhatsApp-kanaallink. Eén plek, zodat de knoppen elders (Hero, sticky
+// De WhatsApp-groepslink. Eén plek, zodat de knoppen elders (Hero, sticky
 // balk) dezelfde link gebruiken.
 export const WHATSAPP_URL =
   'https://chat.whatsapp.com/FOwhbYSC7KY5bIwIwar2go?s=sw&p=i&mlu=0'
@@ -52,13 +52,13 @@ export default function Updates() {
         <span className="section-label">Updates</span>
         <h2 className="section-title">Hoe het met Tom gaat</h2>
         <div className="timeline">
-          {/* Aankondiging: updates lopen voortaan via het WhatsApp-kanaal. */}
+          {/* Aankondiging: updates lopen voortaan via de WhatsApp-groep. */}
           <div className="timeline-item channel-item">
             <span className="timeline-date">24 juli 2026</span>
             <p>
-              Vanaf nu delen we updates via ons WhatsApp-kanaal. Zo
-              blijf je direct op de hoogte en mis je niets. Volg ons kanaal om
-              op de voet te volgen hoe het met Tom gaat.
+              Vanaf nu delen we updates via onze WhatsApp-groep. Zo
+              blijf je direct op de hoogte en mis je niets. Word lid van de
+              groep om op de voet te volgen hoe het met Tom gaat.
             </p>
             <a
               className="btn btn-whatsapp"
@@ -66,7 +66,7 @@ export default function Updates() {
               target="_blank"
               rel="noreferrer"
             >
-              <WhatsAppIcon /> Volg het WhatsApp-kanaal →
+              <WhatsAppIcon /> Word lid van de WhatsApp-groep →
             </a>
           </div>
 
