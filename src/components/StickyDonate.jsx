@@ -1,4 +1,5 @@
 import { formatEuro } from '../lib/format.js'
+import { WHATSAPP_URL } from './Updates.jsx'
 
 // Sticky doneerbalk — alleen zichtbaar op mobiel (zie CSS),
 // en verborgen zodra de doneersectie zelf in beeld is.
@@ -17,7 +18,12 @@ export default function StickyDonate({ raised, goal, hidden }) {
           <div className="mini-fill" style={{ width: `${pct}%` }} />
         </div>
       </div>
-      <a href="#updates" className="btn btn-gold">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="btn btn-gold"
+      >
         Laatste nieuws
       </a>
     </div>

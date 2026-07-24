@@ -1,4 +1,5 @@
 import HeartLine from './HeartLine.jsx'
+import { WHATSAPP_URL } from './Updates.jsx'
 
 export default function Hero() {
   return (
@@ -11,7 +12,12 @@ export default function Hero() {
             komt hij niet in aanmerking voor de behandeling die hem kan
             helpen. In Israël wel, maar die moeten we zelf betalen.
           </p>
-          <a href="#updates" className="btn btn-gold btn-big">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-gold btn-big"
+          >
             Lees het laatste nieuws →
           </a>
         </div>
