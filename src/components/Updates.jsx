@@ -13,7 +13,6 @@ export const UPDATES = [
     channel: true,
     text: <p>
       Het is niet meer mogelijk om lid te worden van de WhatsApp-groep.
-      Vanaf dit moment delen we de updates weer hier op de website.
     </p>,
   },
   {
