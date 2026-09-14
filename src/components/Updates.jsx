@@ -9,8 +9,21 @@ export const UPDATES = [
     </>,
   },
   {
+    date: '14 september 2026',
+    channel: true,
+    text: <p>
+      Het is niet meer mogelijk om lid te worden van de WhatsApp-groep.
+      Vanaf dit moment delen we de updates weer hier op de website.
+    </p>,
+  },
+  {
     date: '24 juli 2026',
-    text: <p>De WhatsApp-groep waarin we tijdens de behandeling updates deelden, is inmiddels gesloten.</p>,
+    channel: true,
+    text: <p>
+      Vanaf nu delen we updates via onze WhatsApp-groep. Zo blijf je direct
+      op de hoogte en mis je niets. Word lid van de groep om op de voet te
+      volgen hoe het met Tom gaat.
+    </p>,
   },
   {
     date: '14 juli 2026',
@@ -50,8 +63,8 @@ export default function Updates() {
         <span className="section-label">Updates</span>
         <h2 className="section-title">Hoe het met Tom gaat</h2>
         <div className="timeline">
-          {UPDATES.map((u) => (
-            <div className="timeline-item" key={u.date}>
+          {UPDATES.map((u, i) => (
+            <div className={u.channel ? 'timeline-item channel-item' : 'timeline-item'} key={i}>
               <span className="timeline-date">{u.date}</span>
               {u.text}
               {u.slug && (

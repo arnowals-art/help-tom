@@ -1557,39 +1557,17 @@ footer .footer-links {
   color: var(--gold);
 }
 
-/* Uitgelicht blok bovenaan de tijdlijn: het WhatsApp-kanaal. */
+/* Mededeling in de tijdlijn (bijv. over het WhatsApp-kanaal): subtiel
+   oranje kader. Het oranje bolletje op de lijn komt van .timeline-item. */
 .channel-item {
-  background: #e9fbf1;
-  border: 1px solid rgba(37, 211, 102, 0.4);
+  background: var(--gold-tint);
+  border: 1px solid rgba(232, 160, 32, 0.35);
   border-radius: var(--radius);
   padding: 20px 24px;
 }
 
-.channel-item::before {
-  background: #25d366;
-}
-
 .channel-item p {
   margin-top: 6px;
-}
-
-/* Groene WhatsApp-knop. */
-.btn-whatsapp {
-  margin-top: 16px;
-  background: #25d366;
-  color: #fff;
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
-}
-
-.btn-whatsapp:not(:disabled):hover {
-  background: #1ebe5b;
-  transform: translateY(-2px);
-}
-
-.wa-icon {
-  width: 22px;
-  height: 22px;
-  fill: currentColor;
 }
 
 @media (max-width: 720px) {
